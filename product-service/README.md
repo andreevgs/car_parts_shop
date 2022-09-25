@@ -4,7 +4,7 @@
 
 Temporary I've changed `fetchAvailableProducts` to `fetchProducts` to see all products on main page with images.
 
-[FE main page](https://d31qwwzbuo55t9.cloudfront.net/)
+[FE main page](https://d31qwwzbuo55t9.cloudfront.net/) 
 
 The original pages for which the product service is intended also work with API:
 
