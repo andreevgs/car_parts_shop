@@ -5,7 +5,8 @@
   "main": "serverless.ts",
   "scripts": {
     "test": "jest",
-    "deploy": "sls deploy"
+    "deploy": "sls deploy",
+    "db:fill": "ts-node src/scripts/fill-db-with-products.ts"
   },
   "engines": {
     "node": ">=14.15.0"
@@ -13,7 +14,8 @@
   "dependencies": {
     "@middy/core": "^2.5.3",
     "@middy/http-cors": "^3.3.4",
-    "@middy/http-json-body-parser": "^2.5.3"
+    "@middy/http-json-body-parser": "^2.5.3",
+    "aws-sdk": "^2.1227.0"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
@@ -21,7 +23,7 @@
     "@types/node": "^14.14.25",
     "esbuild": "^0.14.11",
     "jest": "^29.0.3",
-    "json-schema-to-ts": "^1.5.0",
+    "json-schema-to-ts": "^1.6.5",
     "serverless": "^3.0.0",
     "serverless-auto-swagger": "^2.8.2",
     "serverless-esbuild": "^1.23.3",
