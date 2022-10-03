@@ -1,6 +1,5 @@
 import {formatInternalServerErrorResponse, formatJSONResponse, ValidatedAPIGatewayProxyEvent} from '@libs/api-gateway';
 import {middyfy} from '@libs/lambda';
-// import {APIGatewayProxyEvent} from "aws-lambda";
 import AWS from "aws-sdk";
 import schema from "@functions/createProduct/schema";
 import { v4 as uuidv4 } from 'uuid';
