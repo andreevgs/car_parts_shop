@@ -9,6 +9,9 @@ const StocksTable = process.env.STOCKS_TABLE;
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 const getProductById = async (event: APIGatewayProxyEvent) => {
+  console.log("ENVIRONMENT VARIABLES\n" + JSON.stringify(process.env, null, 2))
+  console.info("EVENT\n" + JSON.stringify(event, null, 2))
+
   const params = {
     TableName: ProductsTable,
     Key: {
@@ -34,14 +37,12 @@ const getProductById = async (event: APIGatewayProxyEvent) => {
     }
 
     const stock = await dynamoDb.get(stocksTableParams(product.Item.id)).promise();
-    console.log(product, stock);
     const productStockJoined = {...product.Item, count: stock.Item.count};
 
     return formatJSONResponse({
       product: productStockJoined,
     });
   } catch (e) {
-    console.log(e);
     return formatInternalServerErrorResponse({
       message: 'could not process request',
     });

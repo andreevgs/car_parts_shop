@@ -9,6 +9,9 @@ const StocksTable = process.env.STOCKS_TABLE;
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 const createProduct = async (event: ValidatedAPIGatewayProxyEvent<typeof schema>) => {
+    console.log("ENVIRONMENT VARIABLES\n" + JSON.stringify(process.env, null, 2))
+    console.info("EVENT\n" + JSON.stringify(event, null, 2))
+
     const data = event.body;
     const productId = uuidv4();
 
@@ -42,7 +45,6 @@ const createProduct = async (event: ValidatedAPIGatewayProxyEvent<typeof schema>
             }
         ).promise();
     } catch(e) {
-        console.log(e);
         return formatInternalServerErrorResponse({
             message: 'could not add product',
         });
