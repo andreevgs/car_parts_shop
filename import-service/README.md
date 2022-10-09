@@ -1,25 +1,3 @@
-# Product Service
-
-It will be deployed even if you don't have DynamoDB tables. All will be created automatically due the first deploy.
-
-If your database is empty you can fill it with basic products using command:
-```
-npm run db:fill
-```
-
-[Swagger with API description](https://09tjnjfro4.execute-api.eu-west-1.amazonaws.com/dev/swagger)
-
-The FE pages for which the product service is intended can work with API:
-
-[FE admin/products](https://d31qwwzbuo55t9.cloudfront.net/admin/products) - you can click `manage` button of any product to go to form. You can
-
-[FE admin/product-form](https://d31qwwzbuo55t9.cloudfront.net/admin/product-form) - you can create new product and then see it in the table.
-
-[createProduct API endpoint](https://09tjnjfro4.execute-api.eu-west-1.amazonaws.com/dev/products)(also you can find it in swagger)
-# Run tests
-
-There are tests for every lambda function. To run all test run `npm run test` command.
-
 # Serverless - AWS Node.js Typescript
 
 This project has been generated using the `aws-nodejs-typescript` template from the [Serverless framework](https://www.serverless.com/).
