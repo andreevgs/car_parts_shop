@@ -12,6 +12,10 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.188.0",
+    "@aws-sdk/client-sns": "^3.188.0",
+    "@aws-sdk/client-sqs": "^3.188.0",
+    "@aws-sdk/lib-dynamodb": "^3.188.0",
     "@middy/core": "^2.5.3",
     "@middy/http-cors": "^3.3.4",
     "@middy/http-json-body-parser": "^2.5.3",

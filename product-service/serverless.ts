@@ -3,11 +3,13 @@ import type { AWS } from '@serverless/typescript';
 import getProductsList from '@functions/getProductsList';
 import getProductById from '@functions/getProductById';
 import createProduct from '@functions/createProduct';
+import catalogBatchProcess from '@functions/catalogBatchProcess';
 
 const serverlessConfiguration: AWS = {
   service: 'product-service',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild', 'serverless-offline', 'serverless-auto-swagger'],
+  useDotenv: true,
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
@@ -25,7 +27,12 @@ const serverlessConfiguration: AWS = {
         Resource: [
           { "Fn::GetAtt": ["ProductsTable", "Arn" ] },
           { "Fn::GetAtt": ["StocksTable", "Arn" ] }
-        ]
+        ],
+      },
+      {
+        Effect: 'Allow',
+        Action: ['sns:*'],
+        Resource: { Ref: 'createProductTopic' }
       }
     ],
     apiGateway: {
@@ -36,11 +43,12 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       PRODUCTS_TABLE: '${self:custom.productsTable}',
-      STOCKS_TABLE: '${self:custom.stocksTable}'
+      STOCKS_TABLE: '${self:custom.stocksTable}',
+      CREATE_PRODUCT_TOPIC_ARN: { Ref: 'createProductTopic' },
     },
   },
   // import the function via paths
-  functions: { getProductsList, getProductById, createProduct },
+  functions: { getProductsList, getProductById, createProduct, catalogBatchProcess },
   resources: {
     Resources: {
       ProductsTable: {
@@ -78,7 +86,31 @@ const serverlessConfiguration: AWS = {
           },
           TableName: '${self:custom.stocksTable}'
         }
-      }
+      },
+      catalogItemsQueue: {
+        Type: 'AWS::SQS::Queue',
+        Properties: {
+          QueueName: "catalogItemsQueue"
+        }
+      },
+      createProductTopic: {
+        Type: 'AWS::SNS::Topic',
+        Properties: {
+          TopicName: 'createProductTopic',
+          Subscription: [
+            { Protocol: 'email', Endpoint: '${env:EMAIL}' }
+          ],
+        }
+      },
+      expensiveProductsImportSub: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          TopicArn: { Ref: 'createProductTopic' },
+          Endpoint: '${env:EXPENSIVE_EMAIL}',
+          FilterPolicy: { price: [{ "numeric": [">=", 100] }] },
+          Protocol: 'email',
+        }
+      },
     }
   },
   package: { individually: true },

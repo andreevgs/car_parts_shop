@@ -7,8 +7,9 @@ import {
     GetObjectCommandOutput,
     S3Client
 } from "@aws-sdk/client-s3";
-import {BUCKET_NAME, REGION} from "../../configs/config";
 import {S3Handler} from "aws-lambda";
+import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
+import {BUCKET_NAME, REGION} from "../../configs/config";
 
 const getFileName = (key: string) => {
     const splittedKey = key.split('/');
@@ -17,15 +18,36 @@ const getFileName = (key: string) => {
     return fileNameWithExtension;
 };
 
-const getProductsData = (getObjectResponse: GetObjectCommandOutput) => {
+const sendDataToQueue = (sqsClient: SQSClient, data: any) => {
+    if (typeof data !== 'object') return;
+    if (typeof data.title !== 'string') return;
+    if (data.description !== undefined && typeof data.description !== 'string') return false;
+    const price = typeof data.price === 'string' ? parseFloat(data.price) : data.price;
+    if (typeof price !== 'number' || price <= 0) return;
+    const count = typeof data.count === 'string' ? parseInt(data.count) : data.count;
+    if (typeof count !== 'number' || count <= 0) return;
+
+    sqsClient.send(new SendMessageCommand({
+        QueueUrl: process.env.SQS_URL,
+        MessageBody: JSON.stringify({
+            price,
+            count,
+            title: data.title,
+            description: data.description,
+        }),
+    }));
+
+};
+
+const processProductsData = (getObjectResponse: GetObjectCommandOutput): Promise<unknown[]> => {
+    const sqsClient = new SQSClient({ region: REGION });
+
     return new Promise((resolve) => {
         const results = [];
         getObjectResponse.Body
-            ?.pipe(csv({separator: '\t'}))
-            ?.on('data', (data) => results.push(data))
-            ?.on('end', () => {
-                resolve(results)
-            });
+            ?.pipe(csv({ separator: '\t' }))
+            ?.on('data', (data) => { sendDataToQueue(sqsClient, data); })
+            ?.on('end', () => { resolve(results) });
     });
 }
 
@@ -41,8 +63,7 @@ export const importFileParser: S3Handler = async (event) => {
             Key: createdObjectKey,
         }));
 
-        const productsData = await getProductsData(getObjectResponse);
-        console.log('productsData', productsData);
+        await processProductsData(getObjectResponse);
 
         const fileName = getFileName(createdObjectKey);
         if (!fileName) return;
