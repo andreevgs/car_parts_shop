@@ -1,0 +1,66 @@
+[
+  {
+    "count": 4,
+    "description": "ATE brakes have come as standard equipment on some of the world's finest cars since the 1930s. If your vehicle was originally equipped with ATE brakes, new replacement ATE brakes will ensure that you retain the exceptional control during braking that your vehicle was designed for. But you can still get the advantages of ATE brakes even if your car didn't have them from the factory.",
+    "id": "1",
+    "price": 60.4,
+    "title": "ATE Brake Disc (Front)",
+    "image": "https://images.lteplatform.com/images/products/600x600/104442165.jpg"
+  },
+  {
+    "count": 6,
+    "description": "Most modern cars have disc brakes on the front wheels, and some have disc brakes on all four wheels. The function of the brake disc is to slow down or stop the car. When the brake pedal is pressed the brake pads \"squeeze\" the brake disc which generates friction.",
+    "id": "2",
+    "price": 70.14,
+    "title": "Textar Brake Disc (Rear)",
+    "image": "https://images.lteplatform.com/images/products/600x600/topcat_10444187.jpg"
+  },
+  {
+    "count": 7,
+    "description": "Mobil 1 0W-40 is especially suitable for extreme conditions, where conventional oil often cannot perform.",
+    "id": "3",
+    "price": 33.1,
+    "title": "Mobil 1 FS Engine Oil - 0W-40 1Ltr",
+    "image": "https://images.lteplatform.com/images/products/600x600/521771852.jpg?v=1.1"
+  },
+  {
+    "count": 12,
+    "description": "Maximum productivity with CERA TURBO™, 50% faster material removal and 2x longer lifetime vs. bonded disc.",
+    "id": "4",
+    "price": 51.39,
+    "title": "Milwaukee FLAP GRINDING DISC XL",
+    "image": "https://images.lteplatform.com/images/products/600x600/MIL4932478946.jpg?v=12.21"
+  },
+  {
+    "count": 7,
+    "description": "Garrett is an Original Equipment Manufacturer (OEM) to the world's largest diesel engine producers. Their products are built and designed with the consumer in mind, aiming for top quality and the best efficiency. Keeping your vehicle running is their number one priority!",
+    "id": "5",
+    "price": 500,
+    "title": "Garrett 848212-5001S Chevrolet",
+    "image": "https://m.media-amazon.com/images/I/51opfip7sqL._AC_.jpg"
+  },
+  {
+    "count": 8,
+    "description": "The long awaited exhaust from Akrapovic for the Audi RS6 C8 is now available. The exhaust is manufactured from high-grade titanium produced in Akrapovič’s in-house foundry.",
+    "id": "6",
+    "price": 9299.9,
+    "title": "AKRAPOVIC EXHAUST AUDI RS6 C8 AVANT",
+    "image": "https://www.baanvelgen.com/media/catalog/product/cache/1/image/85e4522595efc69f496374d01ef2bf13/a/k/akrapovic-audi-rs6-c8-exhaust.jpg"
+  },
+  {
+    "count": 2,
+    "description": "Carbon Fiber Infused Ceramic Brake Pads",
+    "id": "7",
+    "price": 123,
+    "title": "Power Stop (Z23-1084) Z23 Evolution Sport Brake Pads, Front",
+    "image": "https://m.media-amazon.com/images/I/71SoLzTvdyL._AC_SL1500_.jpg"
+  },
+  {
+    "count": 3,
+    "description": "Tire for performance sports cars",
+    "id": "8",
+    "price": 15,
+    "title": "Michelin Pilot Sport 4 S 315/30R21",
+    "image": "https://cdn21vek.by/img/galleries/6357/809/pilotsport4s31530r21105yporsche_michelin_608262898cbd5.jpeg"
+  }
+]
