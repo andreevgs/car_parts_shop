@@ -4,6 +4,7 @@ import {PublishCommand, SNSClient} from '@aws-sdk/client-sns';
 import type {SQSHandler} from 'aws-lambda';
 import {DynamoDB} from "@aws-sdk/client-dynamodb";
 import {createProductBody} from "../../types/api-types";
+import {middyfy} from "@libs/lambda";
 
 const getDBDocumentClient = () => {
     const dbClient = new DynamoDB({ region: 'eu-west-1' });
@@ -95,4 +96,4 @@ export const catalogBatchProcess: SQSHandler = async (event) => {
     }
 };
 
-export const main = catalogBatchProcess;
+export const main = middyfy(catalogBatchProcess);
